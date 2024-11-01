@@ -1,6 +1,8 @@
 ﻿namespace Bookstore.Data
 {
-    public class BookstoreContext
+    public class BookstoreContext : DbContext
+    {
     {
     }
+}
 }

@@ -1,6 +1,8 @@
 ﻿using Bookstore.Data;
 using Bookstore.Models;
+using Bookstore.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Serialization;
 
 namespace Bookstore.Services
 {
@@ -28,5 +30,20 @@ namespace Bookstore.Services
         {
             return await _context.Genres.FindAsync(id);
         }
+
+        public async Task RemoveAsync(int id)
+        {
+            try
+            {
+                var obj = await _context.Genres.FindAsync(id);
+                _context.Genres.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new IntegrityException("Não foi possivel fazer a ação.");
+            }
+        }
     }
+    
 }

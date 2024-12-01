@@ -32,7 +32,7 @@ namespace Bookstore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Genre genre)
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return View();
             }
@@ -106,6 +106,21 @@ namespace Bookstore.Controllers
             {
                 return RedirectToAction(nameof(Error), new { message = ex.Message});
             }
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id is null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "id não fornecido" });
+            }
+
+            var obj = await _service.FindByIdAsync(id.Value);
+            if (obj is null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "id não encontrado" });
+            }
+            return View(obj);
         }
 
         public IActionResult Error(string? message)

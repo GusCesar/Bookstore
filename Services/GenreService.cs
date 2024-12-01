@@ -2,22 +2,28 @@
 using Bookstore.Models;
 using Bookstore.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace Bookstore.Services
 {
 	public class GenreService
 	{
+		// Atributo privado do Context
 		private readonly BookstoreContext _context;
+		// Construtor passando ele
 		public GenreService(BookstoreContext context)
 		{
 			_context = context;
 		}
+
+		// Método que faz o que o controller tava fazendo
+		// Agora a gente faz o controller chamar esse método aqui.
+		// GET: Genres
 		public async Task<List<Genre>> FindAllAsync()
 		{
 			return await _context.Genres.ToListAsync();
 		}
 
+		// GET: Genres/Details/x
 		public async Task<Genre> FindByIdEagerAsync(int id)
 		{
 			return await _context.Genres.Include(x => x.Books).FirstOrDefaultAsync(x => x.Id == id);
@@ -29,12 +35,14 @@ namespace Bookstore.Services
 			return await _context.Genres.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
+		// POST: Genres/Create
 		public async Task InsertAsync(Genre genre)
 		{
 			_context.Add(genre);
 			await _context.SaveChangesAsync();
 		}
 
+		// POST: Genres/Delete/x
 		public async Task RemoveAsync(int id)
 		{
 			try
@@ -49,6 +57,7 @@ namespace Bookstore.Services
 			}
 		}
 
+		// POST: Genres/Edit/x
 		public async Task UpdateAsync(Genre genre)
 		{
 			bool hasAny = await _context.Genres.AnyAsync(x => x.Id == genre.Id);

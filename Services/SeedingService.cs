@@ -14,6 +14,7 @@ namespace Bookstore.Services
 		{
 			if (_context.Genres.Any() ||
 			   _context.Books.Any() ||
+			   _context.Sales.Any() ||
 			   _context.Sale.Any() ||
 			   _context.Seller.Any()
 			   )
@@ -146,6 +147,11 @@ namespace Bookstore.Services
 			b25.Genres.Add(g13);
 
 			// Funcionários
+			Seller se1 = new Seller(1, "Gabriel Barbosa", "gabriel.pescoco@gmail.com", 4000);
+			Seller se2 = new Seller(2, "Mariana Sousa", "mariana.sousa@gmail.com", 3500);
+			Seller se3 = new Seller(3, "João Ferreira", "joao.ferreira@gmail.com", 3700);
+			Seller se4 = new Seller(4, "Paula Castro", "paula.castro@gmail.com", 4100);
+			Seller se5 = new Seller(5, "Luiz Oliveira", "luiz.oliveira@gmail.com", 3800);
 			Sellers se1 = new Sellers(1, "Gabriel Barbosa", "gabriel.pescoco@gmail.com", 4000);
 			Sellers se2 = new Sellers(2, "Mariana Sousa", "mariana.sousa@gmail.com", 3500);
 			Sellers se3 = new Sellers(3, "João Ferreira", "joao.ferreira@gmail.com", 3700);
@@ -483,6 +489,7 @@ namespace Bookstore.Services
 				se1, se2, se3, se4, se5
 			);
 
+			await _context.Sales.AddRangeAsync(
 			// Adicionando Vendas
 			await _context.Sale.AddRangeAsync(
 				sa1, sa2, sa3, sa4, sa5, sa6, sa7, sa8, sa9, sa10,

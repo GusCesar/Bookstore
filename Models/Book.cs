@@ -31,13 +31,10 @@ namespace Bookstore.Models
         [Display(Name = "Gêneros Literários")]
         public ICollection<Genre> Genres { get; set; } = new List<Genre>();
 
-
         private static readonly int _currentYear = DateTime.Now.Year;
 
         public Book()
         {
-
-        }
         public Book(int id, string title, double price, string author, int releaseYear)
         {
             Id = id;

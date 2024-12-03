@@ -18,6 +18,7 @@ namespace Bookstore.Models
         public double Amount => CalculateTotalAmount();
 
         [Display(Name = "Vendedor")]
+        public Seller Seller { get; set; }
         public Sellers Seller { get; set; }
 
         [Display(Name = "Livros")]

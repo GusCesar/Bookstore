@@ -9,18 +9,10 @@ namespace Bookstore.Data
         public BookstoreContext(DbContextOptions<BookstoreContext> options) : base(options)
         {
         }
-<<<<<<< Updated upstream
-
-        public DbSet<Genre> Genres { get; set; }
-=======
-        
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Seller> Seller { get; set; }  
         public DbSet<Sales> Sales { get; set; }
         public DbSet<Book> Books { get; set; }
-        
+	}
 
-
->>>>>>> Stashed changes
-    }
 }

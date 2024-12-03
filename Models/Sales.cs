@@ -19,6 +19,7 @@ namespace Bookstore.Models
 
         [Display(Name = "Vendedor")]
         public Seller Seller { get; set; }
+        public Sellers Seller { get; set; }
 
         [Display(Name = "Livros")]
         public ICollection<Book> Books { get; set; } = new List<Book>();

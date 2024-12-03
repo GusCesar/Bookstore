@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Bookstore.Models.ViewModels;
 
 namespace Bookstore.Models
 {
@@ -34,8 +35,6 @@ namespace Bookstore.Models
 
         public Book()
         {
-        }
-
         public Book(int id, string title, double price, string author, int releaseYear)
         {
             Id = id;

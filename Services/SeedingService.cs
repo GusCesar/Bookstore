@@ -15,11 +15,13 @@ namespace Bookstore.Services
 			if (_context.Genres.Any() ||
 			   _context.Books.Any() ||
 			   _context.Sales.Any() ||
+			   _context.Sale.Any() ||
 			   _context.Seller.Any()
 			   )
 			{
 				return;
 			}
+			// Gêneros
 			Genre g1 = new Genre(1, "Literatura Americana");
 			Genre g2 = new Genre(2, "Romance de Aventura");
 			Genre g3 = new Genre(3, "História do Mar");
@@ -42,6 +44,7 @@ namespace Bookstore.Services
 			Genre g20 = new Genre(20, "Poema Épico");
 			Genre g21 = new Genre(21, "Tragédia");
 
+			// Livros
 			Book b1 = new Book(1, "Moby Dick", 89.90, "Herman Melville", 1851);
 			b1.Genres.Add(g1);
 			b1.Genres.Add(g2);
@@ -149,6 +152,11 @@ namespace Bookstore.Services
 			Seller se3 = new Seller(3, "João Ferreira", "joao.ferreira@gmail.com", 3700);
 			Seller se4 = new Seller(4, "Paula Castro", "paula.castro@gmail.com", 4100);
 			Seller se5 = new Seller(5, "Luiz Oliveira", "luiz.oliveira@gmail.com", 3800);
+			Sellers se1 = new Sellers(1, "Gabriel Barbosa", "gabriel.pescoco@gmail.com", 4000);
+			Sellers se2 = new Sellers(2, "Mariana Sousa", "mariana.sousa@gmail.com", 3500);
+			Sellers se3 = new Sellers(3, "João Ferreira", "joao.ferreira@gmail.com", 3700);
+			Sellers se4 = new Sellers(4, "Paula Castro", "paula.castro@gmail.com", 4100);
+			Sellers se5 = new Sellers(5, "Luiz Oliveira", "luiz.oliveira@gmail.com", 3800);
 
 			// Vendas
 			Sales sa1 = new Sales(1);
@@ -464,21 +472,26 @@ namespace Bookstore.Services
 			se5.Sales.Add(sa50);
 			sa50.Seller = se5;
 
+			// Adicionando Gêneros
 			await _context.Genres.AddRangeAsync(
 				g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11, g12, g13, g14, g15, g16, g17, g18, g19, g20, g21
 			);
 
+			// Adicionando Livros
 			await _context.Books.AddRangeAsync(
 				b1, b2, b3, b4, b5, b6, b7, b8, b9, b10,
 				b11, b12, b13, b14, b15, b16, b17, b18, b19, b20,
 				b21, b22, b23, b24, b25
 			);
 
+			// Adicionando Vendedores
 			await _context.Seller.AddRangeAsync(
 				se1, se2, se3, se4, se5
 			);
 
 			await _context.Sales.AddRangeAsync(
+			// Adicionando Vendas
+			await _context.Sale.AddRangeAsync(
 				sa1, sa2, sa3, sa4, sa5, sa6, sa7, sa8, sa9, sa10,
 				sa11, sa12, sa13, sa14, sa15, sa16, sa17, sa18, sa19, sa20,
 				sa21, sa22, sa23, sa24, sa25, sa26, sa27, sa28, sa29, sa30,
@@ -486,6 +499,7 @@ namespace Bookstore.Services
 				sa41, sa42, sa43, sa44, sa45, sa46, sa47, sa48, sa49, sa50
 			);
 
+			// Salvando alterações no banco
 			await _context.SaveChangesAsync();
 		}
 	}

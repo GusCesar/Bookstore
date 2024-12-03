@@ -10,10 +10,48 @@ namespace Bookstore
         {
             var builder = WebApplication.CreateBuilder(args);
 
+<<<<<<< Updated upstream
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<GenreService>();
+=======
+			
+			builder.Services.AddControllersWithViews();
+			builder.Services.AddScoped<GenreService>();
+			builder.Services.AddScoped<BookService>();
+			builder.Services.AddScoped<SeedingService>();
+			builder.Services.AddScoped<SaleService>();
+			builder.Services.AddScoped<SellerService>();
+
+			builder.Services.AddDbContext<BookstoreContext>(options =>
+			{
+				options.UseMySql(
+					builder
+						.Configuration
+						.GetConnectionString("BookstoreContext"),
+					ServerVersion
+						.AutoDetect(
+							builder
+								.Configuration
+								.GetConnectionString("BookstoreContext")
+						)
+				);
+			});
+
+			var app = builder.Build();
+
+			var ptBR = new CultureInfo("pt-BR");
+
+			var localizationOption = new RequestLocalizationOptions
+			{
+				DefaultRequestCulture = new RequestCulture(ptBR),
+				SupportedCultures = new List<CultureInfo> { ptBR },
+				SupportedUICultures = new List<CultureInfo> { ptBR }
+			};
+
+			app.UseRequestLocalization(localizationOption);
+>>>>>>> Stashed changes
 
 
             builder.Services.AddDbContext<BookstoreContext>(options =>
